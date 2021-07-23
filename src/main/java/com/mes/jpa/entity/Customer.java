@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Customer extends BaseEntity {
 
-	private final String CUSTOMER_ID = "customer_id";
+	private static final String CUSTOMER_ID = "customer_id";
+
 	@Id
 	@GeneratedValue
 	@Column(name = CUSTOMER_ID, updatable = false)

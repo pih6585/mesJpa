@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity{
 
-	private final String ITEM_ID = "item_id";
+	private static final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
 	@Column(name = ITEM_ID, updatable = false)

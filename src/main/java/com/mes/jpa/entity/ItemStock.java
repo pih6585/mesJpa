@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemStock extends BaseEntity {
 
-	private final String ITEM_STOCK_ID = "stock_id";
-	private final String ITEM_ID = "item_id";
+	private static final String ITEM_STOCK_ID = "stock_id";
+	private static final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
 	@Column(name = ITEM_STOCK_ID, updatable = false)
