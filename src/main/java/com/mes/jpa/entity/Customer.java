@@ -23,7 +23,7 @@ public class Customer extends BaseEntity {
 	private final String CUSTOMER_ID = "customer_id";
 	@Id
 	@GeneratedValue
-	@Column(name = CUSTOMER_ID)
+	@Column(name = CUSTOMER_ID, updatable = false)
 	private Long id;
 
 	private String customerName;
@@ -39,7 +39,7 @@ public class Customer extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private final List<Sales> sales = new ArrayList<>();
 
-	public Customer(long id, String customerName, String director, Address address) {
+	private Customer(long id, String customerName, String director, Address address) {
 		this.id = id;
 		this.customerName = customerName;
 		this.director = director;
