@@ -38,7 +38,7 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private final List<Sales> sales = new ArrayList<>();
 
-	public User(long id, String userName, String email, String password) {
+	private User(long id, String userName, String email, String password) {
 		this.id = id;
 		this.userName = userName;
 		this.email = email;
