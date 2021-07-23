@@ -33,4 +33,8 @@ public class SalesItem extends BaseEntity{
 	private int amt;
 
 	private String serialNumber;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sales_id")
+	private Sales sales;
 }
