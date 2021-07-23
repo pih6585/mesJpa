@@ -24,7 +24,7 @@ public class Item extends BaseEntity{
 	private final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
-	@Column(name = ITEM_ID)
+	@Column(name = ITEM_ID, updatable = false)
 	private Long id;
 
 	private String itemName;
@@ -45,7 +45,7 @@ public class Item extends BaseEntity{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private final List<SalesItem> salesItems = new ArrayList<>();
 
-	public Item(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
+	private Item(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
 		this.id = id;
 		this.itemName = itemName;
 		this.itemType = itemType;
@@ -53,11 +53,11 @@ public class Item extends BaseEntity{
 		this.remark = remark;
 	}
 
-	public Item createItem(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
+	public static Item createItem(Long id, String itemName, ItemType itemType, String itemSpec, String remark) {
 		return new Item(id,itemName,itemType,itemSpec,remark);
 	}
 
-	public Item updateItem(String itemName, ItemType itemType, String itemSpec, String remark) {
+	public static Item updateItem(Long id, String itemName, ItemType itemType, String itemSpec, String remark) {
 		return new Item(id,itemName,itemType,itemSpec,remark);
 	}
 }
