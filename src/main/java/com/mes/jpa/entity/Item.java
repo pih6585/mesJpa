@@ -21,9 +21,10 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity{
 
+	private final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
-	@Column(name = "item_id")
+	@Column(name = ITEM_ID)
 	private Long id;
 
 	private String itemName;
@@ -36,12 +37,27 @@ public class Item extends BaseEntity{
 	private String remark;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-	private List<ItemStock> itemStocks = new ArrayList<>();
+	private final List<ItemStock> itemStocks = new ArrayList<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-	private List<PurchaseItem> purchaseItems = new ArrayList<>();
+	private final List<PurchaseItem> purchaseItems = new ArrayList<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-	private List<SalesItem> salesItems = new ArrayList<>();
+	private final List<SalesItem> salesItems = new ArrayList<>();
 
+	public Item(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
+		this.id = id;
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.itemSpec = itemSpec;
+		this.remark = remark;
+	}
+
+	public Item createItem(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
+		return new Item(id,itemName,itemType,itemSpec,remark);
+	}
+
+	public Item updateItem(String itemName, ItemType itemType, String itemSpec, String remark) {
+		return new Item(id,itemName,itemType,itemSpec,remark);
+	}
 }
