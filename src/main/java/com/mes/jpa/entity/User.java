@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @Getter
 public class User extends BaseEntity {
 
-	private final String TABLE_ID = "user_id";
+	private final String USER_ID = "user_id";
 	@Id
 	@GeneratedValue
-	@Column(name = TABLE_ID)
+	@Column(name = USER_ID)
 	private Long id;
 
 	@NotNull
