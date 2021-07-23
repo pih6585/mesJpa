@@ -9,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +17,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-	@Id @GeneratedValue
-	@Column(name = "user_id")
+	private final String TABLE_ID = "user_id";
+	@Id
+	@GeneratedValue
+	@Column(name = TABLE_ID)
 	private Long id;
 
+	@NotNull
 	private String userName;
 
 	private String email;
@@ -30,12 +33,23 @@ public class User extends BaseEntity{
 	private String password;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Purchase> purchases = new ArrayList<>();
+	private final List<Purchase> purchases = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Sales> sales = new ArrayList<>();
+	private final List<Sales> sales = new ArrayList<>();
 
+	public User(long id, String userName, String email, String password) {
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
 
+	public User createUser(long id, String userName, String email, String password) {
+		return new User(id, userName, email, password);
+	}
 
-
+	public User updateUser(String userName, String email, String password) {
+		return new User(id, userName, email, password);
+	}
 }
