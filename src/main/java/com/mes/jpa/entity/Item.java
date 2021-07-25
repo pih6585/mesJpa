@@ -46,7 +46,7 @@ public class Item extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private final List<SalesItem> salesItems = new ArrayList<>();
 
-	public Item(String itemName, ItemType itemType, String itemSpec, String remark) {
+	private Item(String itemName, ItemType itemType, String itemSpec, String remark) {
 		this.itemName = itemName;
 		this.itemType = itemType;
 		this.itemSpec = itemSpec;

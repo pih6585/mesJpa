@@ -42,7 +42,7 @@ public class PurchaseItem extends BaseEntity {
 	@JoinColumn(name = PURCHASE_ID)
 	private Purchase purchase;
 
-	public PurchaseItem(Item item, int qty, int prc, int amt, String serialNumber, Purchase purchase) {
+	private PurchaseItem(Item item, int qty, int prc, int amt, String serialNumber, Purchase purchase) {
 		this.item = item;
 		item.getPurchaseItems().add(this);
 		this.qty = qty;
@@ -53,7 +53,7 @@ public class PurchaseItem extends BaseEntity {
 		purchase.getPurchaseItems().add(this);
 	}
 
-	public PurchaseItem(Long id, Item item, int qty, int prc, int amt, String serialNumber, Purchase purchase) {
+	private PurchaseItem(Long id, Item item, int qty, int prc, int amt, String serialNumber, Purchase purchase) {
 		this.id = id;
 		this.item = item;
 		item.getPurchaseItems().add(this);
