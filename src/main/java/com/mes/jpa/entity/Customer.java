@@ -40,18 +40,24 @@ public class Customer extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private final List<Sales> sales = new ArrayList<>();
 
-	private Customer(long id, String customerName, String director, Address address) {
+	private Customer(String customerName, String director, Address address) {
+		this.customerName = customerName;
+		this.director = director;
+		this.address = address;
+	}
+
+	private Customer(Long id, String customerName, String director, Address address) {
 		this.id = id;
 		this.customerName = customerName;
 		this.director = director;
 		this.address = address;
 	}
 
-	public Customer createCustomer(long id, String customerName, String director, Address address) {
-		return new Customer(id, customerName, director, address);
+	public static Customer createCustomer(String customerName, String director, Address address) {
+		return new Customer(customerName, director, address);
 	}
 
-	public Customer updateCustomer(String customerName, String director, Address address) {
+	public static Customer updateCustomer(Long id, String customerName, String director, Address address) {
 		return new Customer(id, customerName, director, address);
 	}
 }

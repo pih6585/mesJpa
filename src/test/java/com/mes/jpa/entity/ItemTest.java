@@ -9,16 +9,17 @@ class ItemTest {
 	@Test
 	@DisplayName("아이템 정보를 입력하면 아이템정보가 생성된다.")
 	public void createItem() {
-		Item createItem = getItem(1L,"볼트",ItemType.MATERIAL,"1x2","미생산자재");
+		Item createItem = getItem();
 
-		assertThat(createItem.getId()).isEqualTo(1L);
-		assertThat(createItem.getItemName()).isEqualTo("볼트");
+		assertThat(createItem.getItemName()).isEqualTo("나사");
+		assertThat(createItem.getItemType()).isEqualTo(ItemType.ITEM);
+		assertThat(createItem.getItemSpec()).isEqualTo("2x2");
 	}
 
 	@Test
 	@DisplayName("아이템 정보를 수정하면 아이템정보가 수정된다.")
 	public void updateItem() {
-		Item createItem = getItem(2L,"나사",ItemType.ITEM,"2x2","서브자재");
+		Item createItem = getItem();
 
 		Item updateItem = Item.updateItem(createItem.getId(),createItem.getItemName(), createItem.getItemType(),"2x3","재생산");
 
@@ -27,8 +28,8 @@ class ItemTest {
 		assertThat(updateItem.getRemark()).isEqualTo("재생산");
 	}
 
-	private Item getItem(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
-		return Item.createItem(id, itemName, itemType, itemSpec, remark);
+	private Item getItem() {
+		return Item.createItem("나사",ItemType.ITEM,"2x2","서브자재");
 	}
 
 }

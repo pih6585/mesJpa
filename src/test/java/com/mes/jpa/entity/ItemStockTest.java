@@ -12,7 +12,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("제품정보 및 수량 및 시리얼 번호를 입력하면 재고가 저장된다.")
 	public void createStock() {
-		Item item = Item.createItem(1L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem("1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 
 		ItemStock result = getItemStock(1L, item, "1234", 100);
 		assertThat(result.getItem()).isEqualTo(item);
@@ -22,7 +22,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("재고정보를 수정하면 재고가 수정된다.")
 	public void updateStock() {
-		Item item = Item.createItem(1L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem("1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 
 		ItemStock result = getItemStock(1L, item, "1234", 100);
 		ItemStock updateItemStock = ItemStock.updateStock(2L,result.getItem(),result.getSerialNumber(),150);
@@ -34,7 +34,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("재고수량을 추가하면 재고가 증가된다.")
 	public void addStock() {
-		Item item = Item.createItem(1L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem( "1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 		ItemStock result = getItemStock(1L, item, "1234", 100);
 
 		int addStockValue = result.addStock(200);
@@ -45,7 +45,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("재고수량을 삭제하면 재고가 감소된다.")
 	public void minusStock() {
-		Item item = Item.createItem(1L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem("1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 		ItemStock result = getItemStock(1L, item, "1234", 200);
 
 		int minusStockValue = result.minusStock(100);
@@ -56,7 +56,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("재고수량을 감소시 0보다 작으면  예외가 발생된다.")
 	public void minusStock_zero_check() {
-		Item item = Item.createItem(2L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem("1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 		ItemStock result = getItemStock(2L, item, "4586", 100);
 
 		assertThatThrownBy(() -> result.minusStock(200))
@@ -67,7 +67,7 @@ class ItemStockTest {
 	@Test
 	@DisplayName("재고에 저장된 제품정보와 제품에 저장된 재고 정보가 포함되어 있다.")
 	public void itemsStockByItemContainsItemByItemStock() {
-		Item item = Item.createItem(2L, "1자드라이버", ItemType.자재, "1x2", "테스트자재");
+		Item item = Item.createItem("1자드라이버", ItemType.MATERIAL, "1x2", "테스트자재");
 		getItemStock(2L, item, "4586", 100);
 		getItemStock(1L, item, "4885", 50);
 

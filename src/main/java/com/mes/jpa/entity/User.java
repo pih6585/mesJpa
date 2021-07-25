@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,18 +39,24 @@ public class User extends BaseEntity {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private final List<Sales> sales = new ArrayList<>();
 
-	private User(long id, String userName, String email, String password) {
+	private User(String userName, String email, String password) {
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
+
+	private User(Long id, String userName, String email, String password) {
 		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 	}
 
-	public User createUser(long id, String userName, String email, String password) {
-		return new User(id, userName, email, password);
+	public static User createUser(String userName, String email, String password) {
+		return new User(userName, email, password);
 	}
 
-	public User updateUser(String userName, String email, String password) {
+	public static User updateUser(Long id, String userName, String email, String password) {
 		return new User(id, userName, email, password);
 	}
 }

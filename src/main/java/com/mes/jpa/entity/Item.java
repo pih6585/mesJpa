@@ -14,12 +14,13 @@ import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item extends BaseEntity{
+public class Item extends BaseEntity {
 
 	private static final String ITEM_ID = "item_id";
 	@Id
@@ -45,7 +46,14 @@ public class Item extends BaseEntity{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private final List<SalesItem> salesItems = new ArrayList<>();
 
-	private Item(long id, String itemName, ItemType itemType, String itemSpec, String remark) {
+	public Item(String itemName, ItemType itemType, String itemSpec, String remark) {
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.itemSpec = itemSpec;
+		this.remark = remark;
+	}
+
+	private Item(Long id, String itemName, ItemType itemType, String itemSpec, String remark) {
 		this.id = id;
 		this.itemName = itemName;
 		this.itemType = itemType;
@@ -53,11 +61,11 @@ public class Item extends BaseEntity{
 		this.remark = remark;
 	}
 
-	public static Item createItem(Long id, String itemName, ItemType itemType, String itemSpec, String remark) {
-		return new Item(id,itemName,itemType,itemSpec,remark);
+	public static Item createItem(String itemName, ItemType itemType, String itemSpec, String remark) {
+		return new Item(itemName, itemType, itemSpec, remark);
 	}
 
 	public static Item updateItem(Long id, String itemName, ItemType itemType, String itemSpec, String remark) {
-		return new Item(id,itemName,itemType,itemSpec,remark);
+		return new Item(id, itemName, itemType, itemSpec, remark);
 	}
 }
