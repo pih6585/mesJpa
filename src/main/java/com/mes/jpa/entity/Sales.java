@@ -21,21 +21,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Sales extends BaseEntity {
 
-	private static final String SALES_ID = "sales_id";
-	private static final String CUSTOMER_ID = "customer_id";
-	private static final String USER_ID = "user_id";
-
 	@Id
 	@GeneratedValue
-	@Column(name = SALES_ID)
+	@Column(name = "sales_id",  updatable = false)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = CUSTOMER_ID)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = USER_ID)
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@OneToMany(mappedBy = "sales", fetch = FetchType.LAZY)

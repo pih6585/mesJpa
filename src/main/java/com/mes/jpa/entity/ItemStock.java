@@ -17,15 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemStock extends BaseEntity {
 
-	private static final String ITEM_STOCK_ID = "stock_id";
-	private static final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
-	@Column(name = ITEM_STOCK_ID, updatable = false)
+	@Column(name = "stock_id", updatable = false)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = ITEM_ID)
+	@JoinColumn(name = "item_id")
 	private Item item;
 
 	@Column(unique = true)

@@ -19,11 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class User extends BaseEntity {
-
-	private final String USER_ID = "user_id";
 	@Id
 	@GeneratedValue
-	@Column(name = USER_ID)
+	@Column(name = "user_id", updatable = false)
 	private Long id;
 
 	@NotNull

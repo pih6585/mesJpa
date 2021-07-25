@@ -17,16 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SalesItem extends BaseEntity {
 
-	private static final String SALES_ITEM_ID = "sales_item_id";
-	private static final String ITEM_ID = "item_id";
-	private static final String SALES_ID = "sales_id";
 	@Id
 	@GeneratedValue
-	@Column(name = SALES_ITEM_ID)
+	@Column(name = "sales_item_id",  updatable = false)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = ITEM_ID)
+	@JoinColumn(name = "item_id")
 	private Item item;
 
 	private int qty;
@@ -38,7 +35,7 @@ public class SalesItem extends BaseEntity {
 	private String serialNumber;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = SALES_ID)
+	@JoinColumn(name = "sales_id")
 	private Sales sales;
 
 	private SalesItem(Item item, int qty, int prc, int amt, String serialNumber, Sales sales) {

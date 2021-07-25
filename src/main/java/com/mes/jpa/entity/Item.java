@@ -22,10 +22,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity {
 
-	private static final String ITEM_ID = "item_id";
 	@Id
 	@GeneratedValue
-	@Column(name = ITEM_ID, updatable = false)
+	@Column(name = "item_id", updatable = false)
 	private Long id;
 
 	private String itemName;
