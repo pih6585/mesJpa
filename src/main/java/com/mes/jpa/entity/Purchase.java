@@ -24,7 +24,8 @@ public class Purchase extends BaseEntity {
 	private static final String PURCHASE_ID = "purchase_id";
 	private static final String CUSTOMER_ID = "customer_id";
 	private static final String USER_ID = "user_id";
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	@Column(name = PURCHASE_ID)
 	private Long id;
 
@@ -38,4 +39,27 @@ public class Purchase extends BaseEntity {
 
 	@OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
 	private final List<PurchaseItem> purchaseItems = new ArrayList<>();
+
+	private Purchase(Customer customer, User user) {
+		this.customer = customer;
+		customer.getPurchases().add(this);
+		this.user = user;
+		user.getPurchases().add(this);
+	}
+
+	private Purchase(Long id, Customer customer, User user) {
+		this.id = id;
+		this.customer = customer;
+		customer.getPurchases().add(this);
+		this.user = user;
+		user.getPurchases().add(this);
+	}
+
+	public static Purchase createPurchase(Customer customer, User user) {
+		return new Purchase(customer, user);
+	}
+
+	public static Purchase updatePurchase(Long id, Customer customer, User user) {
+		return new Purchase(id, customer, user);
+	}
 }
