@@ -31,6 +31,13 @@ public class ItemStock extends BaseEntity {
 
 	private int stockQty;
 
+	public ItemStock(Item item, String serialNumber, int stockQty) {
+		this.item = item;
+		this.serialNumber = serialNumber;
+		this.stockQty = stockQty;
+		item.getItemStocks().add(this);
+	}
+
 	private ItemStock(long id, Item item, String serialNumber, int stockQty) {
 		this.id = id;
 		this.item = item;
@@ -39,12 +46,12 @@ public class ItemStock extends BaseEntity {
 		item.getItemStocks().add(this);
 	}
 
-	public static ItemStock createStock(long id, Item item, String serialNumber, int stockQty) {
-		return new ItemStock(id,item,serialNumber,stockQty);
+	public static ItemStock createStock(Item item, String serialNumber, int stockQty) {
+		return new ItemStock(item, serialNumber, stockQty);
 	}
 
 	public static ItemStock updateStock(Long id, Item item, String serialNumber, int stockQty) {
-		return new ItemStock(id,item,serialNumber,stockQty);
+		return new ItemStock(id, item, serialNumber, stockQty);
 	}
 
 	public int addStock(int stockQty) {
@@ -53,7 +60,7 @@ public class ItemStock extends BaseEntity {
 
 	public int minusStock(int stockQty) {
 		int calculateQty = this.stockQty - stockQty;
-		if(calculateQty < 0){
+		if (calculateQty < 0) {
 			throw new IllegalArgumentException("재고수량이 0 이하가 될수 없습니다.");
 		}
 		return calculateQty;
